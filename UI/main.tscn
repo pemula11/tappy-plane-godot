@@ -1,0 +1,136 @@
+[gd_scene load_steps=11 format=3 uid="uid://by4qekheagq7c"]
+
+[ext_resource type="Script" path="res://UI/main.gd" id="1_lyhdi"]
+[ext_resource type="Texture2D" uid="uid://dybi87pabtk8u" path="res://assets/background/sky.png" id="1_tx77i"]
+[ext_resource type="LabelSettings" uid="uid://7lpcnbgpgv8x" path="res://assets/LG_72_Red.tres" id="3_blm38"]
+[ext_resource type="FontFile" uid="uid://6ypddtweqn5l" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="4_vd2e2"]
+[ext_resource type="AudioStream" uid="uid://cfm6shlalvgld" path="res://assets/audio/bgm_menu.mp3" id="5_rjyet"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pmg8r"]
+font = ExtResource("4_vd2e2")
+font_size = 48
+font_color = Color(0.890196, 0.968627, 0.980392, 1)
+outline_size = 15
+outline_color = Color(0.0156863, 0.74902, 0.815686, 1)
+shadow_size = 13
+shadow_color = Color(0, 0.647059, 0.219608, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kq4bk"]
+font = ExtResource("4_vd2e2")
+font_size = 24
+font_color = Color(0.784314, 0.243137, 0.243137, 1)
+outline_size = 3
+outline_color = Color(1, 0.968627, 0.298039, 1)
+shadow_size = 6
+shadow_color = Color(0, 0.611765, 0.615686, 0)
+
+[sub_resource type="Animation" id="Animation_bli1w"]
+resource_name = "flash"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MC/Label2:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f756c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MC/Label2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d3osd"]
+_data = {
+"RESET": SubResource("Animation_f756c"),
+"flash": SubResource("Animation_bli1w")
+}
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lyhdi")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_tx77i")
+expand_mode = 4
+
+[node name="MC" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 24
+
+[node name="Label" type="Label" parent="MC"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Tappy
+ Plane"
+label_settings = ExtResource("3_blm38")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="MC"]
+layout_mode = 2
+text = "Press Space
+To Play"
+label_settings = SubResource("LabelSettings_pmg8r")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MC"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Label" type="Label" parent="MC/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "HighScore"
+label_settings = SubResource("LabelSettings_kq4bk")
+
+[node name="highscore" type="Label" parent="MC/HBoxContainer"]
+layout_mode = 2
+text = "00
+"
+label_settings = SubResource("LabelSettings_kq4bk")
+
+[node name="MenuMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_rjyet")
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "flash"
+libraries = {
+"": SubResource("AnimationLibrary_d3osd")
+}

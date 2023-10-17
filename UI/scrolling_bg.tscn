@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://cjqpw7u5itldp"]
+
+[ext_resource type="Script" path="res://UI/scrolling_bg.gd" id="1_k2r3t"]
+[ext_resource type="PackedScene" uid="uid://dp8su5ouv1kx5" path="res://UI/scrolling_layer.tscn" id="2_0qcrp"]
+[ext_resource type="Texture2D" uid="uid://dybi87pabtk8u" path="res://assets/background/sky.png" id="3_re1hv"]
+[ext_resource type="Texture2D" uid="uid://dnsm8fukej3ft" path="res://assets/background/clouds_1.png" id="4_pb5k3"]
+[ext_resource type="Texture2D" uid="uid://ckr02gmh0r23l" path="res://assets/background/clouds_2.png" id="5_6vn3v"]
+[ext_resource type="Texture2D" uid="uid://cjsit7ofaywy" path="res://assets/background/rocks_1.png" id="6_cum8j"]
+[ext_resource type="Texture2D" uid="uid://0lxmgcjopu58" path="res://assets/background/rocks_2.png" id="7_vv62n"]
+
+[node name="ScrollingBg" type="ParallaxBackground"]
+script = ExtResource("1_k2r3t")
+
+[node name="ScrollingLayer" parent="." instance=ExtResource("2_0qcrp")]
+texture = ExtResource("3_re1hv")
+
+[node name="ScrollingLayer2" parent="." instance=ExtResource("2_0qcrp")]
+texture = ExtResource("4_pb5k3")
+scroll_scale = 0.2
+
+[node name="ScrollingLayer3" parent="." instance=ExtResource("2_0qcrp")]
+texture = ExtResource("5_6vn3v")
+scroll_scale = 0.4
+
+[node name="ScrollingLayer4" parent="." instance=ExtResource("2_0qcrp")]
+texture = ExtResource("6_cum8j")
+scroll_scale = 0.5
+
+[node name="ScrollingLayer5" parent="." instance=ExtResource("2_0qcrp")]
+texture = ExtResource("7_vv62n")
+scroll_scale = 0.7
